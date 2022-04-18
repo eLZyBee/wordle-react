@@ -1,3 +1,5 @@
+import { dictionary, dictionaryLength } from '../assets/dictionary';
+
 const letterMatchEnum = {
   NO: 0,
   NEAR: 1,
@@ -8,13 +10,14 @@ export const enumMapColors = ['coral', 'goldenrod', 'mediumseagreen'];
 
 export const startGame = () => {
   // Select a random word
-  const word = "replace";
+  const word = Object.keys(dictionary)[Math.round(Math.random() * dictionaryLength)];
 
   const guesses = [];
 
   // Private function for checking guesses
   const checker = (guess) => {
     if (guess.length !== word.length) return;
+    if (dictionary[guess] !== 1) return;
     guesses.push(guess);
     const matches = [];
 

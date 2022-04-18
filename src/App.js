@@ -6,9 +6,10 @@ import { startGame, enumMapColors } from "./utils/game";
 export const App = () => {
   const word = "racing";
   const wordArray = word.toUpperCase().split("");
-  const { length, checker } = startGame();
+  const [ game, setGame ] = useState(startGame());
   const [guessInput, setGuessInput] = useState([]);
   const [guessed, setGuessed] = useState([]);
+  const { length, checker } = game;
 
   console.log(wordArray);
 
@@ -50,11 +51,12 @@ export const App = () => {
         ))}
       </div>
       <input
-        onChange={(e) => setGuessInput(e.target.value)}
+        onChange={(e) => setGuessInput(e.target.value.trim().slice(0, length))}
         value={guessInput}
         onKeyDown={_handleKeyDown}
       />
       <button onClick={checkGuess}>Check</button>
+      <button onClick={() => setGame(startGame())}>Reset</button>
       <UserInput />
     </>
   );
